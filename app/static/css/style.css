@@ -1,0 +1,258 @@
+html { height: 100% }
+
+body {
+	font-family: helvetica, arial, sans-serif;
+	color:#4F4F4F;
+	height:100%;
+}
+
+#wrap{
+	width:100%;
+	min-height:100%;
+	background:#ffffff;
+}
+
+#bodyBlock{
+	margin-left:auto;
+	margin-right:auto;
+	width: 900px;
+}
+
+#header{
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:20px;
+	margin-top:20px;
+	width: 900px;
+	border-bottom: 2px solid #F3961C;
+}
+
+#header a{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+textarea{
+	 border: 1px solid #999999;
+}
+/* FOOTER */
+#footer {
+	position:relative;
+	width: 100%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: -40px;
+	/*position:absolute;
+	clear:both;
+	bottom: 0;
+	padding-bottom:5px;
+	*/
+	text-align: center;
+	font-size: 12px;
+}
+
+#footer a {
+	color: #1144AA;
+	text-decoration: none;
+}
+
+.label{
+	
+	font-weight:bold;
+}
+
+#requestDiv{
+	padding:20px;
+	background:#FFDDB0;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+}
+
+.content{
+	width:400px;
+	padding:20px;
+	background:#FFDDB0;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+}
+
+.emailDiv{
+	margin-bottom:10px;
+	margin-left:auto;
+	margin-right:auto;
+	width:320px;
+}
+
+.contentList{
+	list-style:none;
+}
+
+.contentList li{
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.forTitle{
+	font-family: 'open sans', sans-serif;
+	font-size:20px;
+	font-weight:bold;
+	color: #AB1A23;
+}
+
+.error{
+	font-size:14px;
+	font-weight:bold;
+	color: #008C1C;
+}
+
+.success{
+	font-size:14px;
+	font-weight:bold;
+	color: #AB1A23;
+}
+
+/* Buttons */
+.wide{
+	margin-left:auto;
+	margin-right:auto;
+	width:80%;
+}
+.button {
+	display: inline-block;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 14px/100% Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.button:hover {
+	text-decoration: none;
+}
+.button:active {
+	position: relative;
+	top: 1px;
+}
+ 
+.bigrounded {
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+}
+.medium {
+	font-size: 12px;
+	padding: .4em 1.5em .42em;
+}
+.small {
+	font-size: 11px;
+	padding: .2em 1em .275em;
+}
+ 
+.red {
+	color: #faddde;
+	border: solid 1px #980c10;
+	background: #d81b21;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ed1c24), to(#aa1317));
+	background: -moz-linear-gradient(top,  #ed1c24,  #aa1317);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed1c24', endColorstr='#aa1317');
+}
+.red:hover {
+	background: #b61318;
+	background: -webkit-gradient(linear, left top, left bottom, from(#c9151b), to(#a11115));
+	background: -moz-linear-gradient(top,  #c9151b,  #a11115);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#c9151b', endColorstr='#a11115');
+}
+.red:active {
+	color: #de898c;
+	background: -webkit-gradient(linear, left top, left bottom, from(#aa1317), to(#ed1c24));
+	background: -moz-linear-gradient(top,  #aa1317,  #ed1c24);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa1317', endColorstr='#ed1c24');
+}
+
+/* ===========================================================
+from http://nicolasgallagher.com/pure-css-speech-bubbles/demo/default.css
+** =========================================================== */
+
+/* THE SPEECH BUBBLE
+------------------------------------------------------------------*/
+
+.triangle-isosceles {
+	position:relative;
+	padding:15px;
+	margin:1em 0 3em;
+	color:#000;
+	background:#f3961c; /* default background for browsers without gradient support */
+	/* css3 */
+	background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
+	background:-moz-linear-gradient(#f9d835, #f3961c);
+	background:-o-linear-gradient(#f9d835, #f3961c);
+	background:linear-gradient(#f9d835, #f3961c);
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+}
+
+/* Variant : for left/right positioned triangle
+------------------------------------------ */
+
+.triangle-isosceles.left {
+	margin-left:50px;
+	background:#f3961c;
+}
+
+/* THE TRIANGLE
+----------------------------------------*/
+
+/* creates triangle */
+.triangle-isosceles:after {
+	content:"";
+	position:absolute;
+	bottom:-15px; /* value = - border-top-width - border-bottom-width */
+	left:50px; /* controls horizontal position */
+	border-width:15px 15px 0; /* vary these values to change the angle of the vertex */
+	border-style:solid;
+	border-color:#f3961c transparent;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+}
+
+/* Variant : for right positioned triangle
+------------------------------------------ */
+
+.triangle-isosceles.right {
+	margin-right:50px;
+	background:#f3961c;
+}
+
+/* Variant : right
+------------------------------------------ */
+
+.triangle-isosceles.right:after {
+	top:16px; /* controls vertical position */
+	right:-50px; /* value = - border-left-width - border-right-width */
+	bottom:auto;
+    left:auto;
+	border-width:10px 0 10px 50px;
+	border-color:transparent #f3961c;
+}
+
+.bubbleText{
+	font-size: 14px;
+	color:#FFFFFF;
+}

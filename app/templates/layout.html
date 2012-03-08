@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>HireAnOliner</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>-->
+<script src="{{ url_for('static', filename='js/jquery-1.7.1.min.js')}}"></script>
+{% block head %}{% endblock %}
+</head>
+
+<body>
+<div id="wrap">
+  <div id="header">
+       <a href="/"><label style="font-size:2em; font-weight:bold; color:#2B2B2B;">HireAn<label style="color:#090070">Oliner</label></label></a>
+  </div>
+
+  <div class="main">
+    {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+	<div id="bodyBlock" >
+    {% block body %}{% endblock %}
+    </div>
+  </div>
+</div>
+  <div id="footer">
+	  Want to make this better? Pull the <a href="https://github.com/jiahuang/"> source code</a>. Have suggestions? <a href='twitter.com/jiahuang'>Tell me</a>.
+  </div>
+</body>
+</html>
