@@ -3,22 +3,23 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$('#addOliner').click(function(){
-		// TODO: lock button
-		
+		$('#loading').show();
+		$('#addOliner').hide();
 		$.post('/oliners', 
 			{ email: $('#email').val()},
 			function(data){
 				console.log(data);
+				$('#loading').hide();
 				if ('error' in data){
 					// display error
 					$('#emailError').html(data.error);
 					$('#emailError').show();
 					$('#emailSuccess').hide();
+					$('#addOliner').show();
 				}
 				else if ('success' in data){
 					// display success message
 					$('#emailError').hide();
-					$('#addOliner').hide();
 					$('#emailSuccess').show();
 					$('#emailSuccess').html(data.success);
 				}
@@ -31,11 +32,6 @@ $(document).ready(function() {
 </script>
 {% endblock %}
 {% block body %}
-	<!--HireAnOliner is a free service which provides a curated, weekly projects email that aims to connect 
-	interested Olin students with cool ideas that need building/designing/more ideation.
-	
-	Interesting projects in weekly curated emails.
-	-->
 	<div id="splashDiv" style="height:450px;">
 	<div class="content" style="float:left; ">
 		<div class="forTitle">
@@ -51,6 +47,7 @@ $(document).ready(function() {
 		</ul>
 		<div id="emailError" class="error"></div>
 		<div id="emailSuccess" class="success"></div>
+		<div id="loading" class="loading" style="margin-left:170px; display:none;"> </div>
 	<a href='#' id="addOliner" class="wide button red">Sounds good! Add me to the mailing list!</a>
 	</div>
 	

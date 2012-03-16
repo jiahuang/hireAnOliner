@@ -1,4 +1,5 @@
 import datetime
+import pymongo
 from modelsGlobalConfig import *
 
 @connection.register
@@ -14,7 +15,8 @@ class Requests(Document):
 					'payment': unicode,
 					'detail': unicode,
 					'date':datetime.datetime,
-					'timeframe': unicode}],
+					'timeframe': unicode,
+					'sent': int}],
 	}
 	# ensuring unique emails
 	indexes = [ 
@@ -25,6 +27,11 @@ class Requests(Document):
 	]
 	use_dot_notation = True 
 	required_fields = ['email']
+	default_values = {
+        'jobs': [{
+            'sent': 0,
+        }],
+    }
 	
 @connection.register
 class Oliners(Document):

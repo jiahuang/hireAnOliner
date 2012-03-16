@@ -115,6 +115,11 @@ textarea{
 	color: #AB1A23;
 }
 
+.loading{
+	background-image: url('../site_imgs/ajax-loader.gif');
+	height:32px; width:32px;
+}
+
 /* Buttons */
 .wide{
 	margin-left:auto;

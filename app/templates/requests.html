@@ -8,7 +8,8 @@ $(document).ready(function() {
 	});
 	
 	$('#submit').click(function(){
-		// TODO: lock button
+		$('#loading').show();
+		$('#submit').hide();
 		$.post('/requests',
 		
 			{ name:$('#name').val(), email: $('#email').val(), 
@@ -16,18 +17,19 @@ $(document).ready(function() {
 			payment:$('#payment').val(), timeframe: $('#timeframe').val()},
 			function(data){
 				console.log(data);
+				$('#loading').hide();
 				if ('error' in data){
 					// display error
 					$('#error').html(data.error);
 					$('#error').show();
 					$('#success').hide();
+					$('#submit').show();
 				}
 				else if ('success' in data){
 					// display success message
 					$('#error').hide();
 					$('#success').show();
 					$('#success').html(data.success);
-					$('#submit').hide();
 				}
 			},
 			'json'
@@ -107,6 +109,7 @@ $(document).ready(function() {
 		</table>
 		<div id="error" class="error" style="margin-left:400px; margin-top:10px;"></div>
 		<div id="success" class="success" style="margin-left:400px; margin-top:10px;"></div>
+		<div id="loading" class="loading" style="margin-left:620px; margin-top:10px; display:none;"> </div>
 		<input type="submit" class="button red" value="submit" id="submit" style="margin-top:10px; margin-left:405px; margin-bottom:30px; width:460px;"/>
 	</form>
 	</div>

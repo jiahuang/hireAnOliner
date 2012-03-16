@@ -16,6 +16,9 @@ from contextlib import closing
 import os
 import datetime, sys, json, time, uuid, subprocess
 from models import *
+import sys
+sys.path.append("../scripts")
+from mailboto import Mailboto
 
 ########################################################################
 # Configuration
@@ -43,6 +46,21 @@ def json_res(obj):
 def error(error_msg):
 	return render_template("error.html", error = error_msg)
 
+@app.route('/unsubscribe/<uid>')
+def unsubscribe(uid, methods=['GET', 'POST']):
+	try:
+		userId = pymongo.objectid.ObjectId(uid)
+		user = db.oliners.find_one({'_id':userId})
+		if user:
+			db.oliners.remove({'_id':userId})
+			return render_template('unsubscribed.html')
+	except:
+		pass
+		
+	return error("""We could not find this user. 
+	If you wish to unsubscribe please send an email 
+	with the subject 'Unsubscribe' to mail-bot@hireanoliner.com""")
+
 @app.route('/requests', methods=['GET','POST'])
 def requests():
 	if request.method == 'POST':
@@ -54,32 +72,41 @@ def requests():
 		timeframe = request.form.get('timeframe')
 		
 		if not email or not name or not needs or not detail or not payment or not timeframe:
-			return json_res({'error':'Please fill out all fields'})
+			return json_res({'error':'Please fill out all fields.'})
 		if len(detail) > 650:
-			return json_res({'error':'Please restrict project information to under 650 characters'})
+			return json_res({'error':'Please restrict project information to under 650 characters.'})
 			
 		date = datetime.datetime.utcnow()
 		req = db.Requests.find_one({'email': email})
-		job = {'name':name, 'needs': needs, 'detail': detail, 'payment':payment, 'date':date, 'timeframe':timeframe}
+		job = {'name':name, 'needs': needs, 'detail': detail, 'payment':payment, 'date':date, 'timeframe':timeframe, 'sent':0}
 		
 		if req:
 			db.requests.update({'email':req.email}, {'$push':{'jobs':job}})
 		else:
 			# create new entry for email
 			req = db.Requests()
-			req.email = email
-			req.jobs = [job]
+			req.update({'email':email, 'jobs':[job]})
 			req.save()
 		
+		m = Mailboto(PW)
+		try:
+			m.requestConfirmation(job, email, name)
+		except:
+			return json_res({'error': "We weren't able to find the recipient email. Please double check that the spelling is correct."})
+			
 		return json_res({'success':'Success! Your project information will be emailed to Olin students soon.'})
 		
 	return render_template('requests.html')
 
 @app.route('/oliners', methods=['POST'])
 def oliners():
-	email = request.form.get('email')+'@students.olin.edu'
+	email = request.form.get('email')
+	if not email:
+		return json_res({'error':"You must enter an email address"})
+		
+	email = email +'@students.olin.edu'
 	oliner = db.oliners.find_one({'email':email})
-	print oliner
+	
 	if oliner:
 		return json_res({'error': "You're already on the mailing list"})
 	else:
@@ -87,6 +114,14 @@ def oliners():
 		oliner.email = email
 		oliner.date = datetime.datetime.utcnow()
 		oliner.save()
+		
+		m = Mailboto(PW)
+		try:
+			m.olinerConfirmation(oliner)
+		except:
+			oliner.remove()
+			return json_res({'error': "We weren't able to find the recipient email. Please double check that the spelling is correct."})
+		
 		return json_res({'success':"You've been added to the mailing list. Look out for some cool projects!"})
 		
 @app.route('/', methods=['GET'])
