@@ -103,6 +103,7 @@ class Mailboto:
 			msg.attach(MIMEText(plainEmail+closingMsgPlain, 'plain'))
 			msg.attach(MIMEText(htmlEmail+closingMsgHtml, 'html'))
 			smtpserver.sendmail(self.fromUser['user'], msg['To'] , msg.as_string())
+			print "sent mail to "+user['email']
 		
 		smtpserver.close()
 		plainFile.close()

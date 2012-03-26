@@ -103,8 +103,16 @@ def oliners():
 	email = request.form.get('email')
 	if not email:
 		return json_res({'error':"You must enter an email address"})
-		
-	email = email +'@students.olin.edu'
+	
+	emailType = request.form.get('type')
+	if emailType == 'student':
+		email = email +'@students.olin.edu'
+	elif emailType == 'alumn':
+		email = email + '@alumni.olin.edu'
+	else:
+		return json_res({'error': "You didn't select a valid student type"})
+	
+	email = email.lower()
 	oliner = db.oliners.find_one({'email':email})
 	
 	if oliner:
@@ -119,7 +127,7 @@ def oliners():
 		try:
 			m.olinerConfirmation(oliner)
 		except:
-			oliner.remove()
+			db.oliners.remove({'email':email})
 			return json_res({'error': "We weren't able to find the recipient email. Please double check that the spelling is correct."})
 		
 		return json_res({'success':"You've been added to the mailing list. Look out for some cool projects!"})

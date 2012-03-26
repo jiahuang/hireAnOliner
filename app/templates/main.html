@@ -6,7 +6,7 @@ $(document).ready(function() {
 		$('#loading').show();
 		$('#addOliner').hide();
 		$.post('/oliners', 
-			{ email: $('#email').val()},
+			{ email: $('#email').val(), type: $('#type').val()},
 			function(data){
 				console.log(data);
 				$('#loading').hide();
@@ -43,7 +43,12 @@ $(document).ready(function() {
 			<li>No one gets your email unless you decide to respond to a project request.</li>
 			<li>Get some experience before launching that startup of yours.</li>
 			<li>Just enter your email here and click the stupidly large button<br/>
-			<input type="text" id="email"/><label style="font-size:12px;">@students.olin.edu</label></li>
+				<input type="text" id="email"/>
+				<select id="type">
+					<option value="student">@students.olin.edu</option>
+					<option value="alum">@alumni.olin.edu</option>
+				</select>
+			</li>
 		</ul>
 		<div id="emailError" class="error"></div>
 		<div id="emailSuccess" class="success"></div>
