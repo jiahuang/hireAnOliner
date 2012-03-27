@@ -107,7 +107,7 @@ def oliners():
 	emailType = request.form.get('type')
 	if emailType == 'student':
 		email = email +'@students.olin.edu'
-	elif emailType == 'alumn':
+	elif emailType == 'alum':
 		email = email + '@alumni.olin.edu'
 	else:
 		return json_res({'error': "You didn't select a valid student type"})
